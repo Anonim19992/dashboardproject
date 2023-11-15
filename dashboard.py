@@ -18,7 +18,7 @@ def generate_table(dataframe, max_rows=10):
             ]) for i in range(min(len(dataframe), max_rows))
         ])
     ])
-# Линейный график
+# Линейный график (--- требует замену)
 df1 = pd.DataFrame({
     "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
     "Amount": [4, 1, 2, 2, 4, 5],
@@ -39,9 +39,9 @@ df5 = pd.DataFrame({
     "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
 })
 fig5 = px.scatter(df5, x="Fruit", y="Amount", color="City", size="size")
-# Круговая диаграмма
+# Круговая диаграмма (+++)
 df6 = pd.read_csv('https://raw.githubusercontent.com/Anonim19992/dashboardproject/test/expenses.csv')
-fig6 = px.pie(df6, values='Expenses', names='Articles')
+fig6 = px.pie(df6, values='Расходы', names='Статьи')
 
 app.layout = html.Div(children=[
     generate_table(df4),
