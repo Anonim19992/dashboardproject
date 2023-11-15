@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc
+from dash import Dash, dcc, html, Input, Output, callback
 import plotly.express as px
 import pandas as pd
 
@@ -17,27 +17,17 @@ def generate_table(dataframe, max_rows=7):
             ]) for i in range(min(len(dataframe), max_rows))
         ])
     ])
-# Линейный график (--- требует замену)
-df1 = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
-fig1 = px.line(df1, x="Fruit", y="Amount", color="City")
 # Гистограмма (+++)
 df3 = pd.read_csv('https://raw.githubusercontent.com/Anonim19992/dashboardproject/test/profit_analysis.csv')
 fig3 = px.histogram(df3, x="2021", y="2022", color="Показатели прибыли")
-# График рассеяния
-df5 = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 3, 4],
-    "size": [2, 1, 2, 2, 2, 1],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
-fig5 = px.scatter(df5, x="Fruit", y="Amount", color="City", size="size")
+# График рассеяния (+++)
+df5 = pd.read_csv('https://github.com/Anonim19992/dashboardproject/raw/test/correlation_analysis.csv')
+fig5 = px.scatter(df5, x="2021", y="2022", color="Показатели прибыли", size="% влияния")
 # Круговая диаграмма (+++)
 df6 = pd.read_csv('https://raw.githubusercontent.com/Anonim19992/dashboardproject/test/expenses.csv')
 fig6 = px.pie(df6, values='Расходы', names='Статьи')
+# Слайдер (+++)
+
 
 app.layout = html.Div(children=[
     generate_table(df4),
@@ -47,17 +37,31 @@ app.layout = html.Div(children=[
     ),
     dcc.Graph(
         id='example-graph-5',
-        figure=fig5
+        figure = fig5
+    ),
+    dcc.Slider(
+        df5['2021'].min(),
+        df5['2021'].max(),
+        step=None,
+        value=df5['2021'].min(),
+        id='data_2021-slider'
     ),
     dcc.Graph(
         id='example-graph-3',
         figure=fig3
-    ),
-    dcc.Graph(
-        id='example-graph',
-        figure=fig1
     )
 ])
+
+
+@callback(
+    Output('example-graph-5', 'figure'),
+    Input('data_2021-slider', 'value')
+)
+
+def update_graf(value):
+    chart_data = df5[df5['2021'] > value]
+    fig5 = px.scatter(chart_data, x="2021", y="2022", color="Показатели прибыли", size="% влияния")
+    return fig5
 
 if __name__ == '__main__':
     app.run(debug=True)
