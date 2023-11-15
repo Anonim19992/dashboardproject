@@ -41,7 +41,7 @@ df5 = pd.DataFrame({
 fig5 = px.scatter(df5, x="Fruit", y="Amount", color="City", size="size")
 # Круговая диаграмма
 df6 = pd.read_csv('https://github.com/Anonim19992/dashboardproject/blob/test/expenses.csv')
-fig6 = px.pie(df6, values='Расходы', names='Статьи')
+fig6 = px.pie(df6, values='Expenses', names='Articles')
 
 app.layout = html.Div(children=[
     generate_table(df4),
