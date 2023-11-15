@@ -40,7 +40,7 @@ df5 = pd.DataFrame({
 })
 fig5 = px.scatter(df5, x="Fruit", y="Amount", color="City", size="size")
 # Круговая диаграмма
-df6 = pd.read_csv('https://github.com/Anonim19992/dashboardproject/blob/test/expenses.csv')
+df6 = pd.read_csv('https://raw.githubusercontent.com/Anonim19992/dashboardproject/test/expenses.csv')
 fig6 = px.pie(df6, values='Expenses', names='Articles')
 
 app.layout = html.Div(children=[
