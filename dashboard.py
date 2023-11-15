@@ -40,8 +40,8 @@ df5 = pd.DataFrame({
 })
 fig5 = px.scatter(df5, x="Fruit", y="Amount", color="City", size="size")
 # Круговая диаграмма
-df6 = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv')
-fig6 = px.pie(df6, values='total exports', names='state')
+df6 = pd.read_csv('https://github.com/Anonim19992/dashboardproject/blob/test/expenses.csv')
+fig6 = px.pie(df6, values='Расходы', names='Статьи')
 
 app.layout = html.Div(children=[
     generate_table(df4),
