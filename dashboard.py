@@ -26,7 +26,7 @@ df1 = pd.DataFrame({
 fig1 = px.line(df1, x="Fruit", y="Amount", color="City")
 # Гистограмма
 df3 = pd.read_csv('https://raw.githubusercontent.com/Anonim19992/dashboardproject/test/profit_analysis.csv')
-fig3 = px.histogram(df3, x="Итого", y="Показатели прибыли", barmode="group")
+fig3 = px.histogram(df3, x="Показатели прибыли", y="Итого", barmode="group")
 # График рассеяния
 df5 = pd.DataFrame({
     "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
